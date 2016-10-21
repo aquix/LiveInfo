@@ -16,7 +16,7 @@
 				<div class="data-col-rating">Rating</div>
 			</div>
 			<div data-bind="foreach: data">
-				<div data-bind="style: { top: marginTop }, css: { greyed: (position() % 2 === 0) }" class="data-row">
+				<div data-bind="style: { top: (marginTop() + 'px') }, css: { greyed: (position() % 2 === 0) }" class="data-row">
 					<div data-bind="text: id" class="data-col-id"></div>
 					<div data-bind="text: name" class="data-col-name"></div>
 					<div data-bind="text: rating" class="data-col-rating"></div>
