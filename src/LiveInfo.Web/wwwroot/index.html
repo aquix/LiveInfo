@@ -8,22 +8,23 @@
 </head>
 
 <body>
-	<table>
-		<thead>
-			<tr>
-				<th>Id</th>
-				<th>Name</th>
-				<th>Rating</th>
-			</tr>
-		</thead>
-		<tbody data-bind="foreach: data">
-			<tr>
-				<td data-bind="text: id"></td>
-				<td data-bind="text: name"></td>
-				<td data-bind="text: rating"></td>
-			</tr>
-		</tbody>
-	</table>
+	<div class="table-wrapper">
+		<div class="data-table">
+			<div class="data-row header">
+				<div class="data-col-id">Id</div>
+				<div class="data-col-name">Name</div>
+				<div class="data-col-rating">Rating</div>
+			</div>
+			<div data-bind="foreach: data">
+				<div data-bind="style: { top: marginTop }, css: { greyed: (position() % 2 === 0) }" class="data-row">
+					<div data-bind="text: id" class="data-col-id"></div>
+					<div data-bind="text: name" class="data-col-name"></div>
+					<div data-bind="text: rating" class="data-col-rating"></div>
+				</div>
+			</div>
+		</table>
+	</div>
+
 
 	<script src="lib/knockout/dist/knockout.js"></script>
 	<script src="js/site.js"></script>
