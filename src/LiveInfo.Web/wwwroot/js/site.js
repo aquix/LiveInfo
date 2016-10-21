@@ -14,6 +14,7 @@ class ItemViewModel {
     constructor(id, name, rating) {
         this.id = id;
         this.rating = ko.observable(rating);
+        this.ratingRise = ko.observable(rating);
         this.name = ko.observable(name);
         this.rank = ko.observable(0);
         this.rankRise = ko.observable(0);
@@ -67,12 +68,15 @@ function updateData() {
     fetch(API_PATH).then(res => {
         return res.json();
     }).then(data => {
-        appViewModel.data().forEach(item => {
+        for (let item of appViewModel.data()) {
             let itemData = data.find(itemData => itemData.name == item.name());
             item.name(itemData.name);
 
+            // Update rating
+            let lastRating = item.rating();
             item.rating(itemData.rating);
-        })
+            item.ratingRise(item.rating() - lastRating);
+        }
 
         updateTable();
     });

@@ -29,14 +29,28 @@
     /*transition: background-color 2s;*/
 }
 
+.data-col-rank {
+    display: flex;
+    align-items: center;
+}
+
 .data-row.greyed {
     background-color: #f2f2f2;
 }
 
 .data-row:hover {
     background-color: #D8D8D8;
+    cursor: pointer;
 }
 
 .data-row.header {
     background-color: #4CAF50;
+}
+
+.red {
+    color: #F44336;
+}
+
+.green {
+    color: #009688;
 }
