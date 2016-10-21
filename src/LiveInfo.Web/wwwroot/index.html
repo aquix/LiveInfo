@@ -11,23 +11,34 @@
 	<div class="table-wrapper">
 		<div class="data-table">
 			<div class="data-row header">
+				<div class="data-col-rank">Rank</div>
 				<div class="data-col-id">Id</div>
 				<div class="data-col-name">Name</div>
 				<div class="data-col-rating">Rating</div>
 			</div>
 			<div data-bind="foreach: data">
-				<div data-bind="style: { top: (marginTop() + 'px') }, css: { greyed: (position() % 2 === 0) }" class="data-row">
+				<div data-bind="style: { top: (marginTop() + 'px') }, css: { greyed: (rank() % 2 === 0) }" class="data-row">
+					<div class="data-col-rank">
+						<span data-bind="text: (rank() + 1)"></span>
+						<span data-bind="if: (rankRise() < 0)">
+							<img src="/images/down.png" alt="Down">
+						</span>
+						<span data-bind="if: (rankRise() > 0)">
+							<img src="/images/up.png" alt="Up">
+						</span>
+						<span data-bind="text: (rankRise() || '')"></span>
+					</div>
 					<div data-bind="text: id" class="data-col-id"></div>
 					<div data-bind="text: name" class="data-col-name"></div>
 					<div data-bind="text: rating" class="data-col-rating"></div>
 				</div>
 			</div>
-		</table>
-	</div>
+			</table>
+		</div>
 
 
-	<script src="lib/knockout/dist/knockout.js"></script>
-	<script src="js/site.js"></script>
+		<script src="lib/knockout/dist/knockout.js"></script>
+		<script src="js/site.js"></script>
 </body>
 
 </html>

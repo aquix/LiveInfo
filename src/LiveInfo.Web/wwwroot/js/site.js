@@ -2,7 +2,7 @@
 const REQUEST_INTERVAL = 3000;
 const ROW_WIDTH = 40;
 const ANIMATION_TIME = 500;
-const ANIMATION_STEP = 2;
+const ANIMATION_STEP = 3;
 
 class AppViewModel {
     constructor() {
@@ -15,8 +15,8 @@ class ItemViewModel {
         this.id = id;
         this.rating = ko.observable(rating);
         this.name = ko.observable(name);
-
-        this.position = ko.observable(0);
+        this.rank = ko.observable(0);
+        this.rankRise = ko.observable(0);
         this.marginTop = ko.observable(0);
     }
 }
@@ -25,22 +25,25 @@ function updateTable() {
     let items = appViewModel.data();
     items.sort((a, b) => b.rating() - a.rating());
     items.forEach((value, i) => {
-        let startPosition = items[i].marginTop();
-        items[i].position(i);
-        let endPosition =  (items[i].position() + 1) * ROW_WIDTH;
+        let item = items[i];
+        let startPosition = item.marginTop();
+
+        // Update rank
+        let lastRank = item.rank();
+        item.rank(i);
+        item.rankRise(lastRank - item.rank());
+
+        let endPosition =  (item.rank() + 1) * ROW_WIDTH;
         let animDirection = endPosition > startPosition ? 1 : -1;
 
-        console.log('start ' + i);
         let animationTimer = setInterval(() => {
-            console.log(i + ' ' + items[i].marginTop());
-            items[i].marginTop(items[i].marginTop() + ANIMATION_STEP * animDirection);
-            let currentPosition = items[i].marginTop();
+            item.marginTop(item.marginTop() + ANIMATION_STEP * animDirection);
+            let currentPosition = item.marginTop();
 
             // End animation
             if ((currentPosition - endPosition) * animDirection > 0) {
-                items[i].marginTop(endPosition);
+                item.marginTop(endPosition);
                 clearInterval(animationTimer);
-                console.log('end ' + i);
             }
         }, 20)
     });
@@ -67,6 +70,7 @@ function updateData() {
         appViewModel.data().forEach(item => {
             let itemData = data.find(itemData => itemData.name == item.name());
             item.name(itemData.name);
+
             item.rating(itemData.rating);
         })
 
@@ -80,6 +84,6 @@ ko.applyBindings(appViewModel);
 
 initData();
 
-let requestInterval = setInterval(() => {``
+let requestInterval = setInterval(() => {
     updateData();
 }, REQUEST_INTERVAL);
