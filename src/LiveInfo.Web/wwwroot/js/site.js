@@ -1,5 +1,5 @@
 ﻿const API_PATH = '/api/data';
-const REQUEST_INTERVAL = 10;
+const REQUEST_INTERVAL = 2000;
 const ROW_WIDTH = 40;
 
 class AppViewModel {
@@ -29,10 +29,7 @@ function updateTable() {
     appViewModel.data(items);
 }
 
-let appViewModel = new AppViewModel();
-ko.applyBindings(appViewModel);
-
-let requestInterval = setInterval(() => {``
+function updateData() {
     fetch(API_PATH).then(res => {
         return res.json();
     }).then(data => {
@@ -42,6 +39,13 @@ let requestInterval = setInterval(() => {``
 
         updateTable();
     })
+}
 
-    clearInterval(requestInterval);
+let appViewModel = new AppViewModel();
+ko.applyBindings(appViewModel);
+
+updateData();
+
+let requestInterval = setInterval(() => {``
+    updateData();
 }, REQUEST_INTERVAL);

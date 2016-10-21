@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using LiveInfo.Web.Models;
+using LiveInfo.Web.Utils;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -46,6 +47,7 @@ namespace LiveInfo.Web.Controllers
         // GET: api/values
         [HttpGet]
         public IEnumerable<Item> Get() {
+            data.ChangeRatings();
             return data;
         }
     }

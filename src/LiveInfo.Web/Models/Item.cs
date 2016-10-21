@@ -9,6 +9,6 @@ namespace LiveInfo.Web.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public uint Rating { get; set; }
+        public int Rating { get; set; }
     }
 }
