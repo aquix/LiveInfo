@@ -20,7 +20,7 @@
 				<div data-bind="style: { top: (marginTop() + 'px') },
 								css: { greyed: (rank() % 2 === 0) }" class="data-row">
 					<div class="data-col-rank">
-						<span data-bind="text: (rank() + 1)" class="data-position"></span>
+						<strong><span data-bind="text: (rank() + 1)" class="data-position"></span></strong>
 						<span data-bind="css: { red: (rankRise() < 0), green: (rankRise() > 0) }">
 							<span data-bind="if: (rankRise() < 0)">
 								<i class="fa fa-arrow-down" aria-hidden="true"></i>
