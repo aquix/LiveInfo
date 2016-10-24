@@ -1,5 +1,5 @@
 ﻿const API_PATH = '/api/data';
-const REQUEST_INTERVAL = 3000;
+const REQUEST_INTERVAL = 10000;
 const ROW_WIDTH = 40;
 const ANIMATION_TIME = 500;
 const ANIMATION_STEP = 3;
@@ -91,3 +91,14 @@ initData();
 let requestInterval = setInterval(() => {
     updateData();
 }, REQUEST_INTERVAL);
+
+window.addEventListener('focus', function() {
+    updateData();
+    requestInterval = setInterval(() => {
+        updateData();
+    }, REQUEST_INTERVAL);
+});
+
+window.addEventListener('blur', function() {
+    clearInterval(requestInterval);
+});
