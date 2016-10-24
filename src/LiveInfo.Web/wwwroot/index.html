@@ -5,6 +5,7 @@
 	<meta charset="UTF-8">
 	<title>LiveInfo</title>
 	<link rel="stylesheet" href="css/site.css">
+	<link rel="stylesheet" href="lib/components-font-awesome/css/font-awesome.css">
 </head>
 
 <body>
@@ -12,7 +13,6 @@
 		<div class="data-table">
 			<div class="data-row header">
 				<div class="data-col-rank">Rank</div>
-				<div class="data-col-id">Id</div>
 				<div class="data-col-name">Name</div>
 				<div class="data-col-rating">Rating</div>
 			</div>
@@ -20,19 +20,18 @@
 				<div data-bind="style: { top: (marginTop() + 'px') },
 								css: { greyed: (rank() % 2 === 0) }" class="data-row">
 					<div class="data-col-rank">
-						<span data-bind="text: (rank() + 1)"></span>
-						<span data-bind="if: (rankRise() < 0)">
-							<img src="/images/down.png" alt="Down">
+						<span data-bind="text: (rank() + 1)" class="data-position"></span>
+						<span data-bind="css: { red: (rankRise() < 0), green: (rankRise() > 0) }">
+							<span data-bind="if: (rankRise() < 0)">
+								<i class="fa fa-arrow-down" aria-hidden="true"></i>
+							</span>
+							<span data-bind="if: (rankRise() > 0)">
+								<i class="fa fa-arrow-up" aria-hidden="true"></i>
+							</span>
+							<span data-bind="text: (rankRise() || '')"></span>
 						</span>
-						<span data-bind="if: (rankRise() > 0)">
-							<img src="/images/up.png" alt="Up">
-						</span>
-						<span data-bind="text: (rankRise() || ''),
-										 css: { red: (rankRise() < 0),
-										 	green: (rankRise() > 0) }">
-						</span>
+
 					</div>
-					<div data-bind="text: id" class="data-col-id"></div>
 					<div data-bind="text: name" class="data-col-name"></div>
 					<div data-bind="text: rating,
 									css: { red: (ratingRise() < 0),

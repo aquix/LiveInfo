@@ -1,5 +1,6 @@
 ﻿body {
     font-family: arial,sans-serif;
+    min-width: 360px;
 }
 
 .table-wrapper {
@@ -27,6 +28,10 @@
     width: 100%;
 }
 
+.data-row div {
+    flex: 1;
+}
+
 .data-col-rank {
     display: flex;
     align-items: center;
@@ -51,4 +56,15 @@
 
 .green {
     color: #009688;
+}
+
+.data-position {
+    margin-right: 10px;
+}
+
+@media screen and (max-width: 800px) {
+    .data-table {
+        max-width: 90%;
+        width: 100%;
+    }
 }
